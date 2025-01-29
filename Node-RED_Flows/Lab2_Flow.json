@@ -1,0 +1,138 @@
+[
+    {
+        "id": "d4dedc16.8c4d7",
+        "type": "inject",
+        "z": "4e608cf1.d168e4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "0.1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 260,
+        "wires": [
+            [
+                "e88ec32e.d0fed"
+            ]
+        ]
+    },
+    {
+        "id": "e88ec32e.d0fed",
+        "type": "file in",
+        "z": "4e608cf1.d168e4",
+        "name": "Volts",
+        "filename": "/tmp/data.txt",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 400,
+        "y": 180,
+        "wires": [
+            [
+                "fcf87016.ab01",
+                "5fbd6865.3ae398"
+            ]
+        ]
+    },
+    {
+        "id": "fcf87016.ab01",
+        "type": "ui_chart",
+        "z": "4e608cf1.d168e4",
+        "name": "",
+        "group": "6eea03ed.476f2c",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 590,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5fbd6865.3ae398",
+        "type": "ui_gauge",
+        "z": "4e608cf1.d168e4",
+        "name": "",
+        "group": "6eea03ed.476f2c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "Volts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "15",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 590,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "6eea03ed.476f2c",
+        "type": "ui_group",
+        "name": "Data",
+        "tab": "7e514b4d.31f3e4",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "7e514b4d.31f3e4",
+        "type": "ui_tab",
+        "name": "Lab2",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
