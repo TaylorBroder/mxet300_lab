@@ -95,7 +95,7 @@ def displayText():
     #       Uncomment the line and give it a name of your choice. 
     #       Take notice to the line and understand the format and arguments.
     #################################################
-    # draw.text((40, 0), "Robot Name", font=font, fill=255)
+    draw.text((20, 0), "MXET300-13 Robot", font=font, fill=255)
     
     # The code in line 99 is drawing the IP text on the image starting at pixel coordinates (0,20) with a default font and a background fill of 255.
     draw.text((0, 20), "IP: " + ip, font=font, fill=255)
@@ -107,7 +107,8 @@ def displayText():
     #       Note that you must convert the voltage float value to a string in order for it to be accepted.
     #       Be sure to include the unit symbol for volts and format the display with a default font and a background fill of 255.
     #################################################
-
+    draw.text((0, 40), "Robot Voltage: " + str(getVoltage()) + "V", font=font, fill=255)
+    
     oled.image(image)                           #set the image to be displayed on the OLED                                        
     oled.show()                                 #show the new image
 
