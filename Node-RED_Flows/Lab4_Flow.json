@@ -1,0 +1,180 @@
+[
+    {
+        "id": "b0c09ab8.384cf8",
+        "type": "tab",
+        "label": "Flow 5",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "783e8786.d667d8",
+        "type": "inject",
+        "z": "b0c09ab8.384cf8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "0.1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 280,
+        "wires": [
+            [
+                "63c0d669.7b27d8",
+                "e584e3fd.0ffb"
+            ]
+        ]
+    },
+    {
+        "id": "63c0d669.7b27d8",
+        "type": "file in",
+        "z": "b0c09ab8.384cf8",
+        "name": "X Dot",
+        "filename": "/tmp/xdot.txt",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 390,
+        "y": 200,
+        "wires": [
+            [
+                "d088f3fe.69f54"
+            ]
+        ]
+    },
+    {
+        "id": "e584e3fd.0ffb",
+        "type": "file in",
+        "z": "b0c09ab8.384cf8",
+        "name": "Theta",
+        "filename": "/tmp/thetadot.txt",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 390,
+        "y": 360,
+        "wires": [
+            [
+                "c9482be6.f2f138"
+            ]
+        ]
+    },
+    {
+        "id": "d088f3fe.69f54",
+        "type": "ui_chart",
+        "z": "b0c09ab8.384cf8",
+        "name": "",
+        "group": "7c7bf8de.ac17b8",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "X Dot Value (m/s)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1",
+        "removeOlder": "30",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "1",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 590,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c9482be6.f2f138",
+        "type": "ui_chart",
+        "z": "b0c09ab8.384cf8",
+        "name": "",
+        "group": "7c7bf8de.ac17b8",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Theta Value (Degrees)",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "-90",
+        "ymax": "90",
+        "removeOlder": "30",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "1",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 600,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7c7bf8de.ac17b8",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "97cee49d.4fe858",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "97cee49d.4fe858",
+        "type": "ui_tab",
+        "name": "Lab 4",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]

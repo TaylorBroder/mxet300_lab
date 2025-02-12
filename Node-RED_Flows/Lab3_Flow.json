@@ -1,0 +1,233 @@
+[
+    {
+        "id": "151a276f.297fe9",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3f28d4be.1970bc",
+        "type": "file in",
+        "z": "151a276f.297fe9",
+        "name": "Volts",
+        "filename": "/tmp/data.txt",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 350,
+        "y": 120,
+        "wires": [
+            [
+                "f68fc0f6.19af5",
+                "291395db.ebbf9a"
+            ]
+        ]
+    },
+    {
+        "id": "325a4ef4.a60662",
+        "type": "file in",
+        "z": "151a276f.297fe9",
+        "name": "Value",
+        "filename": "/tmp/value.txt",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 370,
+        "y": 420,
+        "wires": [
+            [
+                "b0953fdd.b16a9"
+            ]
+        ]
+    },
+    {
+        "id": "f68fc0f6.19af5",
+        "type": "ui_gauge",
+        "z": "151a276f.297fe9",
+        "name": "",
+        "group": "8d439452.ce11b8",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "Volts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "20",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 550,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "291395db.ebbf9a",
+        "type": "ui_chart",
+        "z": "151a276f.297fe9",
+        "name": "",
+        "group": "8d439452.ce11b8",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 550,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f19760.f12698a",
+        "type": "inject",
+        "z": "151a276f.297fe9",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "0.1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 180,
+        "wires": [
+            [
+                "3f28d4be.1970bc",
+                "325a4ef4.a60662",
+                "d15a5313.b2b6a"
+            ]
+        ]
+    },
+    {
+        "id": "b0953fdd.b16a9",
+        "type": "ui_gauge",
+        "z": "151a276f.297fe9",
+        "name": "",
+        "group": "a3307e2d.a1c53",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "compass",
+        "title": "gauge",
+        "label": "Degress",
+        "format": "{{value}}",
+        "min": "-180",
+        "max": "180",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 630,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "3d4d69c0.02a0b6",
+        "type": "ui_text",
+        "z": "151a276f.297fe9",
+        "group": "a3307e2d.a1c53",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Direction:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "x": 650,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "d15a5313.b2b6a",
+        "type": "file in",
+        "z": "151a276f.297fe9",
+        "name": "Heading",
+        "filename": "/tmp/heading.txt",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 380,
+        "y": 520,
+        "wires": [
+            [
+                "3d4d69c0.02a0b6"
+            ]
+        ]
+    },
+    {
+        "id": "8d439452.ce11b8",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "1c6b2667.fb2d5a",
+        "order": 1,
+        "disp": true,
+        "width": 6
+    },
+    {
+        "id": "a3307e2d.a1c53",
+        "type": "ui_group",
+        "name": "Group 2",
+        "tab": "1c6b2667.fb2d5a",
+        "order": 2,
+        "disp": true,
+        "width": 6
+    },
+    {
+        "id": "1c6b2667.fb2d5a",
+        "type": "ui_tab",
+        "name": "Lab 3",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]
