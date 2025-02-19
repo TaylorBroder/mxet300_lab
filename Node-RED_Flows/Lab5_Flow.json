@@ -1,0 +1,20 @@
+[
+    {
+        "id": "45631212.1803dc",
+        "type": "file in",
+        "z": "9510bef3.8f094",
+        "name": "Volts",
+        "filename": "/tmp/voltage.txt",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 270,
+        "y": 620,
+        "wires": [
+            [
+                "bae0419.66cc7c"
+            ]
+        ]
+    }
+]
