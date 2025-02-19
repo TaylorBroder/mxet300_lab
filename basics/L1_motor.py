@@ -47,37 +47,10 @@ if __name__ == "__main__":
         time.sleep(2)                       # run fwd for 4 seconds
         print("motors.py: driving reverse")
         sendLeft(-.8)
-        sendRight(.8)
-        time.sleep(1.5)                       # run reverse for 4 seconds
+        sendRight(-.8)
+        time.sleep(2)                       # run reverse for 4 seconds
         print("stopping motors 4 seconds")
-        sendLeft(.8)
-        sendRight(.8)
-        time.sleep(2)
-        
-        sendLeft(-.8)
-        sendRight(.8)
-        time.sleep(1.5)
-        
-        sendLeft(.8)
-        sendRight(.8)
-        time.sleep(2)
-        
-        sendLeft(.8)
-        sendRight(-.8)
-        time.sleep(1.5)
-        
-        sendLeft(.8)
-        sendRight(.8)
-        time.sleep(2)
-        
-        sendLeft(.8)
-        sendRight(-.8)
-        time.sleep(1.5)
-        
-        sendLeft(.8)
-        sendRight(.8)
-        time.sleep(2)
-
         sendLeft(0)
         sendRight(0)
         time.sleep(4)
+        
