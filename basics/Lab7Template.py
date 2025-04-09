@@ -56,10 +56,10 @@ def loop_drive():
         # u_derivative = sc.u_derivative
         
         # THIS BLOCK OUTPUTS DATA TO A CSV FILE
-        if count == 1:  # check if this is the first iteration of the loop
+        '''if count == 1:  # check if this is the first iteration of the loop
             log.clear_file() # clear old contents from the csv file
             log.csv_write([count,pdCurrents[0], pdTargets[0]]) # log this iteration
         elif count > 1 and count <= 400:  # only log 400 samples and then quit logging
-            log.csv_write([count,pdCurrents[0],pdTargets[0]]) # log this iteration
+            log.csv_write([count,pdCurrents[0],pdTargets[0]]) # log this iteration'''
             
 loop_drive() # call the function
