@@ -17,6 +17,9 @@ import L1_log as log # log live data to local files
 #import L1_gamepad as gp # for accessing gamepad directly
 #import Lab7Template
 
+#for mapping
+import lidar_driving
+
 def detect():#look for metals, return true when found.
     pass
 
@@ -94,10 +97,10 @@ if __name__ == "__main__":
             turns+=1
         else:
             detect()
-            #motor.sendLeft(0.7)
-            #motor.sendRight(0.8)
-            sc.driveClosedLoop(pdTargets, pdCurrents, de_dt)  # call on closed loop
-            time.sleep(0.05) # this time controls the frequency of the controller
+            motor.sendLeft(0.7)
+            motor.sendRight(0.8)
+            #sc.driveClosedLoop(pdTargets, pdCurrents, de_dt)  # call on closed loop
+            #time.sleep(0.05) # this time controls the frequency of the controller
             if (detect() == True):
                 #stop robot
                 motor.sendLeft(0.0)
@@ -105,8 +108,8 @@ if __name__ == "__main__":
                 #get location of metal and drop marker
                 marker()
                 #continue
-                #motor.sendLeft(0.7)
-                #motor.sendRight(0.8)
-                sc.driveClosedLoop(pdTargets, pdCurrents, de_dt)  # call on closed loop
-                time.sleep(0.05) # this time controls the frequency of the controller
+                motor.sendLeft(0.7)
+                motor.sendRight(0.8)
+                #sc.driveClosedLoop(pdTargets, pdCurrents, de_dt)  # call on closed loop
+                #time.sleep(0.05) # this time controls the frequency of the controller
                 break
