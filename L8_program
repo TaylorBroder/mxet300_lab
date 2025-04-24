@@ -22,13 +22,31 @@ import L1_log as log # log live data to local files
 #for mapping
 from lidar_driving import SCUTTLE as map
 
-GPIO.setup(27,GPIO.IN)
+GPIO.setup(25,GPIO.IN) # set GPIO pin 25 as input with pull-up resistor
 
 def detect():#look for metals, return true when found.
-    #time.sleep(3)
-    #return true
-    pass
-    
+    voltage_level = read_stable_gpio(25)
+    if voltage_level is not None:
+        #print(f"Stable voltage level: {voltage_level}")
+        if voltage_level == GPIO.LOW:
+            print("Metal detected!")
+            motor.sendLeft(0.0)
+            motor.sendRight(0.0)
+            marker()
+            time.sleep(2)
+            print(f"Metal at ({x,y})")
+            motor.sendLeft(0.7)
+            motor.sendRight(0.8)
+            time.sleep(2)
+            
+        
+def read_stable_gpio(pin, debounce_time=0.03):
+    stable_value = GPIO.input(pin)
+    time.sleep(debounce_time)
+    if GPIO.input(pin) == stable_value:
+        return stable_value
+    return None
+
 def marker():#capture coordinates and log location of metals on nodeRed
     #log coordinates to txt
     L1_log.tmpFile(x, "x.txt")
@@ -49,15 +67,8 @@ if __name__ == "__main__":
     rturn = True
     turns=0
     while True:
-        voltage_level=GPIO.input(27)
-        if voltage_level==GPIO.HIGH:
-            print(f"voltage is high({voltage_level})")
-            time.sleep(1)
-            voltage_level= 0
-        else:
-            print(f"voltage is low({voltage_level})")
-        time.sleep(1)
-        #GPIO.cleanup()
+        kin.getPdCurrent()  # capture latest phi dots & update global var
+        pdCurrents = kin.pdCurrents  # assign the global variable value to a local var
         pdTargets = np.array([9.7, 9.7]) # Input requested PhiDots (radians/s)
         #pdTargets = inv.getPdTargets() # populates target phi dots from GamePad
         kin.getPdCurrent() # capture latest phi dots & update global var
@@ -86,11 +97,8 @@ if __name__ == "__main__":
         
         '''Robot sweeps down to up from left to right. Once object is detected, 
         the robot will turn to the right 90, move forward, and turn 90 again'''
-        #initialize map
-        #robot=map()
-        #map.scan_loop()
         
-        if (dist<=0.7 and -20.0<=angle<=20.0):
+        if (dist<=0.3 and -20.0<=angle<=20.0):
             if rturn:
                 print("Turn right!")
                 motor.sendLeft(0.5)
@@ -118,11 +126,12 @@ if __name__ == "__main__":
             turns+=1
         else:
             detect()
+            print(f"Distance: {dist}m    Angle: {angle}deg  Coordinates: {x,y}")
             motor.sendLeft(0.7)
             motor.sendRight(0.8)
             '''for testing'''
-            time.sleep(5)
-            marker()
+            #time.sleep(5)
+            #marker()
             #sc.driveClosedLoop(pdTargets, pdCurrents, de_dt)  # call on closed loop
             #time.sleep(0.05) # this time controls the frequency of the controller
             if (detect() == True):
@@ -130,7 +139,6 @@ if __name__ == "__main__":
                 motor.sendLeft(0.0)
                 motor.sendRight(0.0)
                 #get location of metal and drop marker
-                marker()
                 #continue
                 motor.sendLeft(0.7)
                 motor.sendRight(0.8)
