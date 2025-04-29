@@ -70,6 +70,22 @@ if __name__ == "__main__":
     rturn = True
     turns=0
     while True:
+        '''kin.getPdCurrent()  # capture latest phi dots & update global var
+        pdCurrents = kin.pdCurrents  # assign the global variable value to a local var
+        pdTargets = np.array([9.7, 9.7]) # Input requested PhiDots (radians/s)
+        #pdTargets = inv.getPdTargets() # populates target phi dots from GamePad
+        kin.getPdCurrent() # capture latest phi dots & update global var
+        pdCurrents = kin.pdCurrents # assign the global variable value to a local var
+                
+        # THIS BLOCK UPDATES VARIABLES FOR THE DERIVATIVE CONTROL
+        t0 = t1  # assign t0
+        t1 = time.time() # generate current time
+        dt = t1 - t0 # calculate dt
+        e00 = e0 # assign previous previous error
+        e0 = e1  # assign previous error
+        e1 = pdCurrents - pdTargets # calculate the latest error
+        de_dt = (e1 - e0) / dt # calculate derivative of error'''
+
         # CALLS THE CONTROL SYSTEM TO ACTION
         #sc.driveOpenLoop(pdTargets)  # call on open loop
         #sc.driveClosedLoop(pdTargets, pdCurrents, de_dt)  # call on closed loop
@@ -118,3 +134,19 @@ if __name__ == "__main__":
             else:
                 motor.sendLeft(0.4)
                 motor.sendRight(0.4)
+            
+            #time.sleep(5)
+            #marker()
+            #sc.driveClosedLoop(pdTargets, pdCurrents, de_dt)  # call on closed loop
+            #time.sleep(0.05) # this time controls the frequency of the controller
+            '''if (detect() == True):
+                #stop robot
+                motor.sendLeft(0.0)
+                motor.sendRight(0.0)
+                #get location of metal and drop marker
+                #continue
+                motor.sendLeft(0.7)
+                motor.sendRight(0.8)
+                #sc.driveClosedLoop(pdTargets, pdCurrents, de_dt)  # call on closed loop
+                #time.sleep(0.05) # this time controls the frequency of the controller
+                break'''
