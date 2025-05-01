@@ -14,9 +14,9 @@ import L2_vector
 #for mapping
 from lidar_driving import SCUTTLE as map
 
-GPIO.setup(25,GPIO.IN,pull_up_down=GPIO.PUD_DOWN) # set GPIO pin 22 as input with pull-up resistor
+GPIO.setup(25,GPIO.IN,pull_up_down=GPIO.PUD_DOWN) # set GPIO pin 25 as input with pull-up resistor
 
-def detect(ticks):#look for metals, return true when found.
+def detect(ticks): #look for metals, record coordinates of metal location.
     voltage_level = read_stable_gpio(25)#GPIO.input(25)
     if voltage_level is not None:
         print(f"Stable voltage level: {voltage_level}")
@@ -36,14 +36,14 @@ def detect(ticks):#look for metals, return true when found.
             ticks=0
     return ticks
  
-def read_stable_gpio(pin, debounce_time=0.025):
+def read_stable_gpio(pin, debounce_time=0.025): #stabilize metal detector signal
     stable_value = GPIO.input(pin)
     time.sleep(debounce_time)
     if GPIO.input(pin) == stable_value:
         return stable_value
     return None
 
-def marker():#capture coordinates and log location of metals on nodeRed
+def marker():#capture coordinates and log location of metals for NodeRed
     #log coordinates to txt
     L1_log.tmpFile(x, "x.txt")
     L1_log.tmpFile(y, "y.txt")
@@ -54,7 +54,7 @@ if __name__ == "__main__":
     rturn = True
     turns=0
     while True:
-        # CALLS THE CONTROL SYSTEM TO ACTION
+        # initialize LIDAR
         dataset = L2_vector.getNearest()
         dist = dataset[0]
         angle = dataset[1]
@@ -63,10 +63,11 @@ if __name__ == "__main__":
         y = coord[1]
         print(dist,angle,x,y)
         ticks=detect(ticks)
+        #drive forward
         motor.sendLeft(0.4)
         motor.sendRight(0.4)
-        if (dist<=0.55 and -30.0<=angle<=30.0):
-            if rturn:
+        if (dist<=0.55 and -30.0<=angle<=30.0):     #if robot is approaching wall, turn right or left
+            if return:    #turn right
                 print("Turn right!")
                 motor.sendLeft(0.5)
                 motor.sendRight(-0.5)
@@ -77,8 +78,8 @@ if __name__ == "__main__":
                 motor.sendLeft(0.5)
                 motor.sendRight(-0.4)
                 time.sleep(2)
-                rturn = False
-            else:
+                rturn = False     #turn left next time
+            else:    #turn left
                 print("Turn left!")
                 motor.sendLeft(-0.5)
                 motor.sendRight(0.5)
@@ -89,14 +90,14 @@ if __name__ == "__main__":
                 motor.sendLeft(-0.5)
                 motor.sendRight(0.5)
                 time.sleep(2)
-                rturn = True
-            turns+=1
+                rturn = True    #turn right next time
+            turns+=1    
             
-        else:
+        else:    If no wall is nearby, keep driving straight and continue looking for metals
             detect(ticks)
-            if ticks >= 1: # if the voltage level is stable for 3 iterations
-                ticks=0
-            else:
+            if ticks >= 1:     # For Testing: if the voltage level is stable for 3 iterations
+                ticks=0     #reset number of ticks
+            else:    #keep driving straight
                 motor.sendLeft(0.4)
                 motor.sendRight(0.4)
             
